@@ -15,19 +15,19 @@ class CreateVisitLogsTable extends Migration
     {
         Schema::create('visitlogs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ip');
-            $table->string('browser');
-            $table->string('os');
-            $table->string('user_id');
-            $table->string('user_name');
-            $table->string('country_code');
-            $table->string('country_name');
-            $table->string('region_name');
-            $table->string('city');
-            $table->string('zip_code');
-            $table->string('time_zone');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('ip')->default('0.0.0.0');
+            $table->string('browser')->nullable();
+            $table->string('os')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('user_name')->nullable();
+            $table->string('country_code')->nullable();
+            $table->string('country_name')->nullable();
+            $table->string('region_name')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->string('time_zone')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->timestamps();
         });
     }
