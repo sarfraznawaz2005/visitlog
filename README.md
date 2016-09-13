@@ -11,6 +11,9 @@ VisitLog is a simple Laravel 5 package that can be used to log visitor informati
  - Allows to cache the visits based on IP.
  - Allows to log authenticated user info.
  - Provides log viewer page out of box.
+ 
+
+**Note:** VisitLog cannot detect same user/IP coming from some anonymizer so it cannot differentiate that.
 
 ## Screenshots ##
 
