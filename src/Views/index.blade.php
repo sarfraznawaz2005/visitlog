@@ -11,8 +11,11 @@
     <link rel="stylesheet"
           href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <style>
+        #table-log {
+            font-size: 84%;
+        }
+    </style>
 
     <!--[if lt IE 9]>
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -24,7 +27,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div>
+        <div align="center">
             <h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Laravel Visit Log</h4>
         </div>
 
@@ -33,6 +36,7 @@
                 @if (config('visitlog.iptolocation'))
                     <thead>
                     <tr>
+                        <th>ID</th>
                         <th>IP</th>
                         <th>Browser</th>
                         <th>OS</th>
@@ -40,12 +44,11 @@
                             <th>User</th>
                         @endif
                         <th>Country</th>
-                        <th>Country Code</th>
                         <th>Region</th>
                         <th>City</th>
                         <th>Zip</th>
                         <th>Timezone</th>
-                        <th>Location (Lat, Lon)</th>
+                        <th>Lt, Ln</th>
                         <th>Date</th>
                         <th>Action</th>
                     </tr>
@@ -54,6 +57,7 @@
 
                     @foreach($visitlogs as $visitlog)
                         <tr>
+                            <td>{{$visitlog->id}}</td>
                             <td>{{$visitlog->ip}}</td>
                             <td>{{$visitlog->browser}}</td>
                             <td>{{$visitlog->os}}</td>
@@ -61,14 +65,13 @@
                                 <td>{{$visitlog->user_id}} - {{$visitlog->user_name}}</td>
                             @endif
                             <td>{{$visitlog->country_name}}</td>
-                            <td>{{$visitlog->country_code}}</td>
                             <td>{{$visitlog->region_name}}</td>
                             <td>{{$visitlog->city}}</td>
                             <td>{{$visitlog->zip_code}}</td>
                             <td>{{$visitlog->time_zone}}</td>
                             <td>{{$visitlog->latitude}}, {{$visitlog->longitude}}</td>
                             <td>{{$visitlog->created_at}}</td>
-                            <td>
+                            <td align="center">
                                 <a data-placement="top" data-original-title="Delete"
                                    class="confirm-delete text-danger"
                                    data-label="Visit Log"
@@ -83,6 +86,7 @@
                 @else
                     <thead>
                     <tr>
+                        <th>ID</th>
                         <th>IP</th>
                         <th>Browser</th>
                         <th>OS</th>
@@ -97,6 +101,7 @@
 
                     @foreach($visitlogs as $visitlog)
                         <tr>
+                            <td>{{$visitlog->id}}</td>
                             <td>{{$visitlog->ip}}</td>
                             <td>{{$visitlog->browser}}</td>
                             <td>{{$visitlog->os}}</td>
@@ -169,7 +174,9 @@
     $(document).ready(function () {
         var $body = $('body');
 
-        $('#table-log').DataTable();
+        $('#table-log').DataTable({
+            "order": [ 0, 'desc' ]
+        });
 
         // confirm delete
         $body.on('click', '.confirm-delete', function (e) {
