@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Sarfraznawaz2005\\VisitLog\\": "packages/sarfraznawaz2005/visitlog/src"
+      "Sarfraznawaz2005\\VisitLog\\": "src/"
     }
   }
 }
