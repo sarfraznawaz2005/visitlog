@@ -27,15 +27,15 @@ class VisitLog
      */
     public function save()
     {
-        $data = $this->getData();
-
         if (config('visitlog.unique')) {
-            $model = VisitLogModel::where('ip', $data['ip'])->first();
+            $model = VisitLogModel::where('ip', $this->getUserIP())->first();
 
             if ($model) {
                 return false;
             }
         }
+
+        $data = $this->getData();
 
         return VisitLogModel::create($data);
     }
