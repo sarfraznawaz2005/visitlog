@@ -14,7 +14,8 @@
       "email": "sarfraznawaz2005@gmail.com"
     }
   ],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "php": ">=5.5.9"
   }
