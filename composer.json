@@ -1,0 +1,21 @@
+{
+  "name": "sarfraznawaz2005/visitlog",
+  "keywords": [
+    "log",
+    "visitor",
+    "ip"
+  ],
+  "description": "This package logs information of visitors and saves into database so website owners can see visitor information.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sarfraz Ahmed",
+      "email": "sarfraznawaz2005@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9"
+  },
+  "minimum-stability": "stable"
+}
