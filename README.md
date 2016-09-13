@@ -19,6 +19,8 @@ VisitLog is a simple Laravel 5 package that can be used to log visitor informati
 
 ![Main Window](https://raw.github.com/sarfraznawaz2005/visitlog/master/screen.png)
 
+*Note: Info in above screenshot is fake.*
+
 ## Requirements ##
 
  - PHP >= 5.5.9
