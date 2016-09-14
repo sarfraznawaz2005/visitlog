@@ -79,7 +79,14 @@ class VisitLog
      */
     protected function getBrowserInfo()
     {
-        return $this->browser->getBrowser() . '(' . $this->browser->getVersion() . ')';
+        $browser = $this->browser->getBrowser() ?: 'Other';
+        $browserVersion = $this->browser->getVersion();
+
+        if (trim($browserVersion)) {
+            return $browser . ' (' . $browserVersion . ')';
+        }
+
+        return $browser;
     }
 
     /**
@@ -97,7 +104,7 @@ class VisitLog
         $data = [
             'ip' => $ip,
             'browser' => $this->getBrowserInfo(),
-            'os' => $this->browser->getPlatform(),
+            'os' => $this->browser->getPlatform() ?: 'Unknown',
         ];
 
         // info from http://freegeoip.net
