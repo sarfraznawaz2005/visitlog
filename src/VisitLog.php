@@ -27,15 +27,17 @@ class VisitLog
      */
     public function save()
     {
+        $data = $this->getData();
+
         if (config('visitlog.unique')) {
             $model = VisitLogModel::where('ip', $this->getUserIP())->first();
 
             if ($model) {
-                return false;
+                // update record of same IP eg new visit times, etc
+                $model->touch();
+                return $model->update($data);
             }
         }
-
-        $data = $this->getData();
 
         return VisitLogModel::create($data);
     }
@@ -67,17 +69,7 @@ class VisitLog
             $ip = $remote;
         }
 
-        return $ip;
-    }
-
-    /**
-     * Gets OS information.
-     *
-     * @return string
-     */
-    protected function getOS()
-    {
-        return $this->browser->getPlatform();
+        return $ip ?: '0.0.0.0';
     }
 
     /**
@@ -105,7 +97,7 @@ class VisitLog
         $data = [
             'ip' => $ip,
             'browser' => $this->getBrowserInfo(),
-            'os' => $this->getOS(),
+            'os' => $this->browser->getPlatform(),
         ];
 
         // info from http://freegeoip.net
@@ -135,7 +127,9 @@ class VisitLog
         if ($userData) {
             $data = array_merge($data, $userData);
         }
-        
+
+        $data = array_map('trim', $data);
+
         return $data;
     }
 

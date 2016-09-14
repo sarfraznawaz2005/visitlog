@@ -36,7 +36,7 @@
                 @if (config('visitlog.iptolocation'))
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>IP</th>
                         <th>Browser</th>
                         <th>OS</th>
@@ -49,15 +49,15 @@
                         <th>Zip</th>
                         <th>Timezone</th>
                         <th>Lt, Ln</th>
-                        <th>Date</th>
+                        <th>Updated</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    @foreach($visitlogs as $visitlog)
+                    @foreach($visitlogs as $key => $visitlog)
                         <tr>
-                            <td>{{$visitlog->id}}</td>
+                            <td>{{$key + 1}}</td>
                             <td>{{$visitlog->ip}}</td>
                             <td>{{$visitlog->browser}}</td>
                             <td>{{$visitlog->os}}</td>
@@ -70,7 +70,7 @@
                             <td>{{$visitlog->zip_code}}</td>
                             <td>{{$visitlog->time_zone}}</td>
                             <td>{{$visitlog->latitude}}, {{$visitlog->longitude}}</td>
-                            <td>{{$visitlog->created_at}}</td>
+                            <td>{{$visitlog->updated_at}}</td>
                             <td align="center">
                                 <a data-placement="top" data-original-title="Delete"
                                    class="confirm-delete text-danger"
@@ -86,29 +86,29 @@
                 @else
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>IP</th>
                         <th>Browser</th>
                         <th>OS</th>
                         @if (config('visitlog.log_user'))
                             <th>User</th>
                         @endif
-                        <th>Date</th>
+                        <th>Updated</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    @foreach($visitlogs as $visitlog)
+                    @foreach($visitlogs as $key => $visitlog)
                         <tr>
-                            <td>{{$visitlog->id}}</td>
+                            <td>{{$key + 1}}</td>
                             <td>{{$visitlog->ip}}</td>
                             <td>{{$visitlog->browser}}</td>
                             <td>{{$visitlog->os}}</td>
                             @if (config('visitlog.log_user'))
                                 <td>{{$visitlog->user_id}} - {{$visitlog->user_name}}</td>
                             @endif
-                            <td>{{$visitlog->created_at}}</td>
+                            <td>{{$visitlog->updated_at}}</td>
                             <td>
                                 <a data-placement="top" data-original-title="Delete"
                                    class="confirm-delete text-danger"
@@ -175,7 +175,7 @@
         var $body = $('body');
 
         $('#table-log').DataTable({
-            "order": [ 0, 'desc' ]
+            "order": [0, 'asc']
         });
 
         // confirm delete
