@@ -24,6 +24,23 @@ class VisitLog extends Model
         'longitude',
     ];
 
+    /**
+     * Mutator that appends in query resultsets as though it is part of db table
+     *
+     * @var array
+     */
+    protected $appends = ['last_visit'];
+
+    /**
+     * Last Visit Accessor.
+     *
+     * @return string
+     */
+    function getLastVisitAttribute()
+    {
+        return $this->updated_at->diffForHumans();
+    }
+
     # global scope that will be applied to all queries
     public function newQuery()
     {

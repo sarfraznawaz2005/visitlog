@@ -70,7 +70,7 @@
                             <td>{{$visitlog->zip_code}}</td>
                             <td>{{$visitlog->time_zone}}</td>
                             <td>{{$visitlog->latitude}}, {{$visitlog->longitude}}</td>
-                            <td>{{$visitlog->updated_at}}</td>
+                            <td title="{{$visitlog->updated_at}}">{{$visitlog->last_visit}}</td>
                             <td align="center">
                                 <a data-placement="top" data-original-title="Delete"
                                    class="confirm-delete text-danger"
@@ -108,7 +108,7 @@
                             @if (config('visitlog.log_user'))
                                 <td>{{$visitlog->user_id}} - {{$visitlog->user_name}}</td>
                             @endif
-                            <td>{{$visitlog->updated_at}}</td>
+                            <td title="{{$visitlog->updated_at}}">{{$visitlog->last_visit}}</td>
                             <td>
                                 <a data-placement="top" data-original-title="Delete"
                                    class="confirm-delete text-danger"
