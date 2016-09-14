@@ -7,13 +7,13 @@
     <title>VisitLog</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet"
-          href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css">
 
     <style>
         #table-log {
-            font-size: 84%;
+            font-size: 90%;
         }
     </style>
 
@@ -28,11 +28,12 @@
     <div class="row">
 
         <div align="center">
-            <h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Laravel Visit Log</h4>
+            <h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Visit Log</h4>
         </div>
 
-        <div class="col-sm-12 col-md-12 table-container">
-            <table id="table-log" class="table table-striped">
+        <div class="col-sm-12 col-md-12 table-container table-responsive">
+            <table cellspacing="0" width="100%" id="table-log"
+                   class="table table-striped table-bordered table-hover table-condensed dt-responsive nowrap">
                 @if (config('visitlog.iptolocation'))
                     <thead>
                     <tr>
@@ -166,16 +167,22 @@
 <!-- delete confirm modal end -->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-1.12.3.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
-<script src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+<script src="//cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
+<script src="//cdn.datatables.net/responsive/2.1.0/js/responsive.bootstrap.min.js"></script>
+
 <script>
     $(document).ready(function () {
         var $body = $('body');
 
         $('#table-log').DataTable({
-            "order": [0, 'asc']
+            "order": [0, 'asc'],
+            "responsive": true,
+            "pageLength": 20,
+            "autoWidth": true
         });
 
         // confirm delete
