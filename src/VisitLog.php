@@ -141,7 +141,7 @@ class VisitLog
         $userData = [];
 
         if (config('visitlog.log_user')) {
-            $name = 'Guest';
+            $name = '';
             $userNameFields = config('visitlog.user_name_fields');
 
             if (Auth::check()) {
@@ -161,7 +161,7 @@ class VisitLog
                 $userData['user_name'] = $name;
             } else {
                 $userData['user_id'] = 0;
-                $userData['user_name'] = $name;
+                $userData['user_name'] = 'Guest';
             }
         }
 
