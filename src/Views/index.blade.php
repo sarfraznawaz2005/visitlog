@@ -67,7 +67,7 @@
                             <td>{{$visitlog->browser}}</td>
                             <td>{{$visitlog->os}}</td>
                             @if (config('visitlog.log_user'))
-                                <td>{{$visitlog->user_id}} - {{$visitlog->user_name}}</td>
+                                <td>{{$visitlog->user_name}} ({{$visitlog->user_id}})</td>
                             @endif
                             <td>{{$visitlog->country_name}}</td>
                             <td>{{$visitlog->region_name}}</td>
@@ -77,7 +77,7 @@
                             <td>{{$visitlog->latitude}}, {{$visitlog->longitude}}</td>
                             <td title="{{$visitlog->updated_at}}">{{$visitlog->last_visit}}</td>
                             <td align="center">
-                                <a data-placement="top" data-original-title="Delete"
+                                <a title="Delete"
                                    class="confirm-delete text-danger"
                                    data-label="Visit Log"
                                    rel="{{route('__delete_visitlog__', ['id'=>$visitlog->id])}}"
@@ -111,11 +111,11 @@
                             <td>{{$visitlog->browser}}</td>
                             <td>{{$visitlog->os}}</td>
                             @if (config('visitlog.log_user'))
-                                <td>{{$visitlog->user_id}} - {{$visitlog->user_name}}</td>
+                                <td>{{$visitlog->user_name}} ({{$visitlog->user_id}})</td>
                             @endif
                             <td title="{{$visitlog->updated_at}}">{{$visitlog->last_visit}}</td>
                             <td>
-                                <a data-placement="top" data-original-title="Delete"
+                                <a title="Delete"
                                    class="confirm-delete text-danger"
                                    data-label="Visit Log"
                                    rel="{{route('__delete_visitlog__', ['id'=>$visitlog->id])}}"
