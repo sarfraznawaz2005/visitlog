@@ -27,6 +27,6 @@ class VisitLog extends Model
     # global scope that will be applied to all queries
     public function newQuery()
     {
-        return parent::newQuery()->orderBy('id', 'DESC');
+        return parent::newQuery()->orderBy('updated_at', 'DESC');
     }
 }
