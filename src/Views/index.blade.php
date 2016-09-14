@@ -15,6 +15,10 @@
         #table-log {
             font-size: 90%;
         }
+
+        th, td {
+            text-align: center;
+        }
     </style>
 
     <!--[if lt IE 9]>
@@ -28,7 +32,7 @@
     <div class="row">
 
         <div align="center">
-            <h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Visit Log</h4>
+            <h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Laravel Visit Log</h4>
         </div>
 
         <div class="col-sm-12 col-md-12 table-container table-responsive">
@@ -182,7 +186,13 @@
             "order": [0, 'asc'],
             "responsive": true,
             "pageLength": 20,
-            "autoWidth": true
+            "autoWidth": true,
+            aoColumnDefs: [
+                {
+                    bSortable: false,
+                    aTargets: [-1]
+                }
+            ]
         });
 
         // confirm delete
