@@ -67,17 +67,7 @@ class VisitLog
             $ip = $remote;
         }
 
-        return $ip;
-    }
-
-    /**
-     * Gets OS information.
-     *
-     * @return string
-     */
-    protected function getOS()
-    {
-        return $this->browser->getPlatform();
+        return $ip ?: '0.0.0.0';
     }
 
     /**
@@ -105,7 +95,7 @@ class VisitLog
         $data = [
             'ip' => $ip,
             'browser' => $this->getBrowserInfo(),
-            'os' => $this->getOS(),
+            'os' => $this->browser->getPlatform(),
         ];
 
         // info from http://freegeoip.net
@@ -135,7 +125,9 @@ class VisitLog
         if ($userData) {
             $data = array_merge($data, $userData);
         }
-        
+
+        $data = array_map('trim', $data);
+
         return $data;
     }
 

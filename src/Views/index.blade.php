@@ -36,7 +36,7 @@
                 @if (config('visitlog.iptolocation'))
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>IP</th>
                         <th>Browser</th>
                         <th>OS</th>
@@ -55,9 +55,9 @@
                     </thead>
                     <tbody>
 
-                    @foreach($visitlogs as $visitlog)
+                    @foreach($visitlogs as $key => $visitlog)
                         <tr>
-                            <td>{{$visitlog->id}}</td>
+                            <td>{{$key + 1}}</td>
                             <td>{{$visitlog->ip}}</td>
                             <td>{{$visitlog->browser}}</td>
                             <td>{{$visitlog->os}}</td>
@@ -86,7 +86,7 @@
                 @else
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>IP</th>
                         <th>Browser</th>
                         <th>OS</th>
@@ -99,9 +99,9 @@
                     </thead>
                     <tbody>
 
-                    @foreach($visitlogs as $visitlog)
+                    @foreach($visitlogs as $key => $visitlog)
                         <tr>
-                            <td>{{$visitlog->id}}</td>
+                            <td>{{$key + 1}}</td>
                             <td>{{$visitlog->ip}}</td>
                             <td>{{$visitlog->browser}}</td>
                             <td>{{$visitlog->os}}</td>
@@ -175,7 +175,7 @@
         var $body = $('body');
 
         $('#table-log').DataTable({
-            "order": [ 0, 'desc' ]
+            "order": [0, 'asc']
         });
 
         // confirm delete
