@@ -13,7 +13,7 @@
 
     <style>
         #table-log {
-            font-size: 90%;
+            font-size: 85%;
         }
 
         th, td {
