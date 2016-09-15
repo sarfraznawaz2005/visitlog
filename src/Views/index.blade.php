@@ -37,7 +37,7 @@
 
         <div class="col-sm-12 col-md-12 table-container table-responsive">
 
-            @if (count($errors) > 0)
+            @if (isset($errors) && count($errors) > 0)
                 <div class="alert alert-danger">
                     <strong>Whoops! Something went wrong!</strong>
 
