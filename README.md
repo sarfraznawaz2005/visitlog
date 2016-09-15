@@ -11,7 +11,8 @@ VisitLog is a simple Laravel 5 package that can be used to log visitor informati
  - Allows to cache the visits based on IP.
  - Allows to log authenticated user info.
  - Provides log viewer page out of box.
- 
+ - Provides basic http authentication for app users.
+
 
 **Note:** VisitLog cannot detect same user/IP coming from some anonymizer so it cannot differentiate that.
 
@@ -55,7 +56,8 @@ Run `php artisan migrate` to create `visitlogs` table in your database.
  - `log_user` : If `true`, it will also log authenticated user info.
  - `user_name_fields` : If `log_user` is `true`, this option can be used to specify name fields of user from your Users table in database.
  - `visitlog_page` : If `true`, a default log viewer page can be viewed at `http//yourapp.com/visitlog` to see all the logs.
- 
+ - `http_authentication` : If `visitlog_page` is `true`, this option can be used to show visit log page to only authenticated app users by asking them email and password via basic http authentication.
+
 ## Saving Log Info ##
 
 To save logs, just call `save` method of `VisitLog` facade:
@@ -69,7 +71,7 @@ If however, you have set `unique` option to `false` and want to log all visits, 
 
 If config option `visitlog_page` is set to `true`, you can view all visit logs by browsing to `http//yourapp.com/visitlog`.
 
-**Note:** If you don't want to allow `visitlog` page to be publicly seen, set the option `visitlog_page` to `false` and now `http//yourapp.com/visitlog` will result in `404` error. 
+**Note:** If you don't want to allow `visitlog` page to be publicly seen, set the option `visitlog_page` to `false` and now `http//yourapp.com/visitlog` will result in `404` error.
 
 In this case, you can still show log info in some authenticated area of your app by using `all` method of `VisitLog` facade: `$visitLogs = VisitLog::all();` and it will give you `Collection` that you can iterate over and show in your own view file.
 

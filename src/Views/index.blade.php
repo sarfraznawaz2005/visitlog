@@ -32,10 +32,25 @@
     <div class="row">
 
         <div align="center">
-            <h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Laravel Visit Log</h4>
+            <h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Visit Log</h4>
         </div>
 
         <div class="col-sm-12 col-md-12 table-container table-responsive">
+
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops! Something went wrong!</strong>
+
+                    <br><br>
+
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <table cellspacing="0" width="100%" id="table-log"
                    class="table table-striped table-bordered table-hover table-condensed dt-responsive nowrap">
                 @if (config('visitlog.iptolocation'))
@@ -55,7 +70,9 @@
                         <th>Timezone</th>
                         <th>Lt, Ln</th>
                         <th>Updated</th>
-                        <th>Action</th>
+                        @if (config('visitlog.delete_log_button'))
+                            <th>Action</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -76,15 +93,17 @@
                             <td>{{$visitlog->time_zone}}</td>
                             <td>{{$visitlog->latitude}}, {{$visitlog->longitude}}</td>
                             <td title="{{$visitlog->updated_at}}">{{$visitlog->last_visit}}</td>
-                            <td align="center">
-                                <a title="Delete"
-                                   class="confirm-delete text-danger"
-                                   data-label="Visit Log"
-                                   rel="{{route('__delete_visitlog__', ['id'=>$visitlog->id])}}"
-                                   href="javascript:void(0);">
-                                    <b class="glyphicon glyphicon-trash"></b>
-                                </a>
-                            </td>
+                            @if (config('visitlog.delete_log_button'))
+                                <td align="center">
+                                    <a title="Delete"
+                                       class="confirm-delete text-danger"
+                                       data-label="Visit Log"
+                                       rel="{{route('__delete_visitlog__', ['id'=>$visitlog->id])}}"
+                                       href="javascript:void(0);">
+                                        <b class="glyphicon glyphicon-trash"></b>
+                                    </a>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>
@@ -99,7 +118,9 @@
                             <th>User</th>
                         @endif
                         <th>Updated</th>
-                        <th>Action</th>
+                        @if (config('visitlog.delete_log_button'))
+                            <th>Action</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -114,20 +135,35 @@
                                 <td>{{$visitlog->user_name}} ({{$visitlog->user_id}})</td>
                             @endif
                             <td title="{{$visitlog->updated_at}}">{{$visitlog->last_visit}}</td>
-                            <td>
-                                <a title="Delete"
-                                   class="confirm-delete text-danger"
-                                   data-label="Visit Log"
-                                   rel="{{route('__delete_visitlog__', ['id'=>$visitlog->id])}}"
-                                   href="javascript:void(0);">
-                                    <b class="glyphicon glyphicon-trash"></b>
-                                </a>
-                            </td>
+                            @if (config('visitlog.delete_log_button'))
+                                <td>
+                                    <a title="Delete"
+                                       class="confirm-delete text-danger"
+                                       data-label="Visit Log"
+                                       rel="{{route('__delete_visitlog__', ['id'=>$visitlog->id])}}"
+                                       href="javascript:void(0);">
+                                        <b class="glyphicon glyphicon-trash"></b>
+                                    </a>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>
                 @endif
             </table>
+
+            @if (config('visitlog.delete_all_logs_button') && $visitlogs->count())
+                <div align="center">
+                    <a title="Delete All Logs"
+                       class="confirm-delete btn btn-danger"
+                       data-label="All Visit Log"
+                       rel="{{route('__delete_visitlog_all__')}}"
+                       href="javascript:void(0);">
+                        <b class="glyphicon glyphicon-trash"></b> Delete All Logs
+                    </a>
+                </div>
+            @endif
+
         </div>
     </div>
 </div>
@@ -185,7 +221,7 @@
         $('#table-log').DataTable({
             "order": [0, 'asc'],
             "responsive": true,
-            "pageLength": 20,
+            "pageLength": 25,
             "autoWidth": true,
             aoColumnDefs: [
                 {

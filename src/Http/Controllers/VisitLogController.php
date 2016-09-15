@@ -7,6 +7,14 @@ use Sarfraznawaz2005\VisitLog\Models\VisitLog as VisitLogModel;
 
 class VisitLogController extends BaseController
 {
+
+    public function __construct()
+    {
+        if (config('visitlog.http_authentication')) {
+            $this->middleware('auth.basic');
+        }
+    }
+
     /**
      * Displays all visitor information in table.
      */
@@ -21,6 +29,7 @@ class VisitLogController extends BaseController
         return view('visitlog::index', compact('visitlogs'));
     }
 
+
     /**
      * Deletes a record.
      *
@@ -32,7 +41,22 @@ class VisitLogController extends BaseController
     {
         $visitLog = $visitLog->find($id);
 
-        if (!$visitLog->delete()) {
+        if ($visitLog && !$visitLog->delete()) {
+            return Redirect::back()->withErrors($visitLog->errors());
+        }
+
+        return Redirect::back();
+    }
+
+    /**
+     * Deletes all records.
+     *
+     * @param VisitLogModel $visitLog
+     * @return mixed
+     */
+    public function destroyAll(VisitLogModel $visitLog)
+    {
+        if (!$visitLog->truncate()) {
             return Redirect::back()->withErrors($visitLog->errors());
         }
 

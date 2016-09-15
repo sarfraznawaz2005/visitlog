@@ -59,10 +59,20 @@ return array(
     | Visit Log Page
     |--------------------------------------------------------------------------
     |
-    | If "true", a page at url http://yourapp.com/visitlog will show all visit logs. If "false",
+    | visitlog_page: If "true", a page at url http://yourapp.com/visitlog will show all visit logs. If "false",
     | 404 will be shown instead.
+    |
+    | delete_log_button: If "true", a delete icon will be added against each log entry.
+    |
+    | delete_all_logs_button: If "true", a button to delete all logs will be shown on visit log page.
+    |
+    | http_authentication: If "true", the visit log page can be viewed by any user who provides
+    | correct email and password (eg all app users).
     |
     */
 
     'visitlog_page' => true,
+    'delete_log_button' => false,
+    'delete_all_logs_button' => false,
+    'http_authentication' => false
 );
