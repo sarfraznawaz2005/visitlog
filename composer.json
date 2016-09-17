@@ -6,7 +6,7 @@
     "visitor",
     "ip"
   ],
-  "description": "This package logs information of visitors and saves into database so website owners can see visitor information.",
+  "description": "Laravel package to log visitor information into database.",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -23,5 +23,6 @@
     "psr-4": {
       "Sarfraznawaz2005\\VisitLog\\": "src/"
     }
-  }
+  },
+  "minimum-stability": "stable"
 }
