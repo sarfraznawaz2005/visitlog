@@ -31,7 +31,7 @@ VisitLog is a simple Laravel 5 package that can be used to log visitor informati
 
 Install via composer
 ```
-composer require sarfraznawaz2005/visitlog=dev-master
+composer require sarfraznawaz2005/visitlog
 ```
 
 Add Service Provider to `config/app.php` in `providers` section
