@@ -24,5 +24,15 @@
       "Sarfraznawaz2005\\VisitLog\\": "src/"
     }
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Sarfraznawaz2005\\VisitLog\\VisitLogServiceProvider"
+      ],
+      "aliases": {
+        "VisitLog": "Sarfraznawaz2005\\VisitLog\\Facades\\VisitLog"
+      }      
+    }
+  }  
 }
