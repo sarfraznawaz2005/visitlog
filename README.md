@@ -4,6 +4,7 @@
 [![Laravel 5.2](https://img.shields.io/badge/Laravel-5.2-brightgreen.svg?style=flat-square)](http://laravel.com)
 [![Laravel 5.3](https://img.shields.io/badge/Laravel-5.3-brightgreen.svg?style=flat-square)](http://laravel.com)
 [![Laravel 5.4](https://img.shields.io/badge/Laravel-5.4-brightgreen.svg?style=flat-square)](http://laravel.com)
+[![Laravel 5.5](https://img.shields.io/badge/Laravel-5.5-brightgreen.svg?style=flat-square)](http://laravel.com)
 [![Total Downloads](https://poser.pugx.org/sarfraznawaz2005/visitlog/downloads)](https://packagist.org/packages/sarfraznawaz2005/visitlog)
 
 ## Introduction ##
