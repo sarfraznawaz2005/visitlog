@@ -32,7 +32,7 @@ VisitLog is a simple Laravel 5 package that can be used to log visitor informati
 ## Requirements ##
 
  - PHP >= 5.5.9
- - Laravel 5 (tested on Laravel 5.1, 5.2 and 5.3)
+ - Laravel 5
 
 ## Installation ##
 
