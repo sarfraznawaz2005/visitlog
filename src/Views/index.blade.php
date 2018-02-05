@@ -52,7 +52,7 @@
             @endif
 
             <table cellspacing="0" width="100%" id="table-log"
-                   class="table table-striped table-bordered table-hover table-condensed dt-responsive nowrap">
+                   class="table table-striped table-bordered table-sm table-hover table-condensed dt-responsive nowrap">
                 @if (config('visitlog.iptolocation'))
                     <thead>
                     <tr>
@@ -75,6 +75,29 @@
                         @endif
                     </tr>
                     </thead>
+
+                    <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>IP</th>
+                        <th>Browser</th>
+                        <th>OS</th>
+                        @if (config('visitlog.log_user'))
+                            <th>User</th>
+                        @endif
+                        <th>Country</th>
+                        <th>Region</th>
+                        <th>City</th>
+                        <th>Zip</th>
+                        <th>Timezone</th>
+                        <th>Lt, Ln</th>
+                        <th>Updated</th>
+                        @if (config('visitlog.delete_log_button'))
+                            <th>Action</th>
+                        @endif
+                    </tr>
+                    </tfoot>
+
                     <tbody>
 
                     @foreach($visitlogs as $key => $visitlog)
@@ -123,6 +146,23 @@
                         @endif
                     </tr>
                     </thead>
+
+                    <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>IP</th>
+                        <th>Browser</th>
+                        <th>OS</th>
+                        @if (config('visitlog.log_user'))
+                            <th>User</th>
+                        @endif
+                        <th>Updated</th>
+                        @if (config('visitlog.delete_log_button'))
+                            <th>Action</th>
+                        @endif
+                    </tr>
+                    </tfoot>
+
                     <tbody>
 
                     @foreach($visitlogs as $key => $visitlog)
@@ -218,7 +258,7 @@
     $(document).ready(function () {
         var $body = $('body');
 
-        $('#table-log').DataTable({
+        var table = $('#table-log').DataTable({
             "order": [0, 'asc'],
             "responsive": true,
             "pageLength": 25,
@@ -247,6 +287,27 @@
             $(this).attr('disabled', true);
             $(this).closest('form')[0].submit();
         });
+
+        // filter columns
+        $("#table-log tfoot th:not(:last)").each(function (i) {
+            var select = $('<select style="width: 100%;"><option value=""></option></select>')
+                .appendTo($(this).empty())
+                .on('change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                    table.column(i)
+                        .search(val ? '^' + val + '$' : '', true, false)
+                        .draw();
+                });
+
+            table.column(i).data().unique().sort().each(function (val, idx) {
+                select.append('<option value="' + val + '">' + val + '</option>')
+            });
+        });
+
+        // put filters on header
+        $('tfoot').css('display', 'table-header-group');
+
     });
 </script>
 </body>

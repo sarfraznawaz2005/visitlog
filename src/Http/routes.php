@@ -3,7 +3,7 @@
 Route::group(
     [
         'namespace' => 'Sarfraznawaz2005\VisitLog\Http\Controllers',
-        'prefix' => 'visitlog'
+        'prefix' => config('visitlog.route', 'visitlog')
     ],
     function () {
         Route::get('/', 'VisitLogController@index')->name('__visitlog__');
