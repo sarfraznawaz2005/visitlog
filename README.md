@@ -55,7 +55,7 @@ Add Facade to `config/app.php` in `aliases` section
 
 ---
 
-Run `php artisan vendor:publish` to publish package's config and migration file. You should now have `visitlog.php` file published in `app/config` folder. It will also publish migration file in `database/migrations` folder.
+Run `php artisan vendor:publish` to publish package's config and migration file. You should now have `config/visitlog.php` file published. It will also publish migration file in `database/migrations` folder.
 
 Run `php artisan migrate` to create `visitlogs` table in your database.
 
