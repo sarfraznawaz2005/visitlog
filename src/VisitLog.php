@@ -1,4 +1,5 @@
 <?php
+
 namespace Sarfraznawaz2005\VisitLog;
 
 use Illuminate\Support\Facades\Auth;
@@ -9,8 +10,8 @@ class VisitLog
 {
     protected $browser = null;
     protected $cachePrefix = 'visitlog';
-    protected $freegeoipUrl = 'http://api.ipstack.com/';
-    protected $tokenString = '?access_key='. config('visitlog.token') .'&output=json&legacy=1';
+    protected $freegeoipUrl = 'http://api.ipstack.com';
+    protected $tokenString = '?output=json&legacy=1';
 
     /**
      * VisitLog constructor.
@@ -99,7 +100,7 @@ class VisitLog
     {
         $ip = $this->getUserIP();
         $cacheKey = $this->cachePrefix . $ip;
-        $url = $this->freegeoipUrl . $ip . $this->tokenString;
+        $url = $this->freegeoipUrl . $this->tokenString . '&access_key=' . config('visitlog.token') . '/' . $ip;
 
         // basic info
         $data = [
