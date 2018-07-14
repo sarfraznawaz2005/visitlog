@@ -10,7 +10,7 @@ class VisitLog
     protected $browser = null;
     protected $cachePrefix = 'visitlog';
     protected $freegeoipUrl = 'http://api.ipstack.com/';
-    protected $tokenString = '?access_key=c364c052ccf2e0d7194f418c906d0137&output=json&legacy=1';
+    protected $tokenString = '?access_key='. config('visitlog.token') .'&output=json&legacy=1';
 
     /**
      * VisitLog constructor.
