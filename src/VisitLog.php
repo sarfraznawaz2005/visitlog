@@ -9,7 +9,8 @@ class VisitLog
 {
     protected $browser = null;
     protected $cachePrefix = 'visitlog';
-    protected $freegeoipUrl = 'http://freegeoip.net/json/';
+    protected $freegeoipUrl = 'http://api.ipstack.com/';
+    protected $tokenString = '?access_key='. config('visitlog.token') .'&output=json&legacy=1';
 
     /**
      * VisitLog constructor.
@@ -98,7 +99,7 @@ class VisitLog
     {
         $ip = $this->getUserIP();
         $cacheKey = $this->cachePrefix . $ip;
-        $url = $this->freegeoipUrl . $ip;
+        $url = $this->freegeoipUrl . $ip . $this->tokenString;
 
         // basic info
         $data = [

@@ -27,6 +27,7 @@ return array(
     */
 
     'iptolocation' => true,
+    'token' => 'PASTE_YOUR_TOKEN', // get your token here: https://ipstack.com/
 
     /*
     |--------------------------------------------------------------------------
