@@ -130,7 +130,6 @@ class VisitLog
             }
         }
 
-        // user info
         $userData = $this->getUser();
 
         if ($userData) {
