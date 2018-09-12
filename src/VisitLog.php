@@ -100,7 +100,7 @@ class VisitLog
     {
         $ip = $this->getUserIP();
         $cacheKey = $this->cachePrefix . $ip;
-        $url = $this->freegeoipUrl . $this->tokenString . '&access_key=' . config('visitlog.token') . '/' . $ip;
+        $url = $this->freegeoipUrl . $this->tokenString . '/' . $ip . '&access_key=' . config('visitlog.token');
 
         // basic info
         $data = [
