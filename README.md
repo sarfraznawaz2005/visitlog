@@ -62,8 +62,8 @@ Run `php artisan migrate` to create `visitlogs` table in your database.
 ## Config Options ##
 
  - `route` : Route where visit log will be available.
- - `iptolocation` : By default, only IP, Browser and OS info is logged. However if you set this option to `true`, it will also log Location info through  http://freegeoip.net service.
- - `cache` : If `iptolocation` is set to `true`, this option can be used to cache the results instead of requesting Location info each time from http://freegeoip.net. 
+ - `iptolocation` : By default, only IP, Browser and OS info is logged. However if you set this option to `true`, it will also log Location info through  https://ipstack.com/ service. Note: You will need to create account there and get your access key and specify that in visitlog config file.
+ - `cache` : If `iptolocation` is set to `true`, this option can be used to cache the results instead of requesting Location info each time from https://ipstack.com/. 
  - `unique` : If `true`, it will only log unique visits based on IP address. If `false`, it will log each visit even from same IP.
  - `log_user` : If `true`, it will also log authenticated user info.
  - `user_name_fields` : If `log_user` is `true`, this option can be used to specify name fields of user from your Users table in database.
