@@ -136,8 +136,10 @@ class VisitLog
             $data = array_merge($data, $userData);
         }
 
-        $data = array_map('trim', $data);
-
+        if (is_array($data)) {
+            $data = array_map('trim', $data);
+        }
+        
         return $data;
     }
 
