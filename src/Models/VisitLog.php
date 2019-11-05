@@ -22,6 +22,7 @@ class VisitLog extends Model
         'time_zone',
         'latitude',
         'longitude',
+        'is_banned'
     ];
 
     /**
