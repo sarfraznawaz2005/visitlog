@@ -28,7 +28,10 @@ class CreateVisitLogsTable extends Migration
             $table->string('time_zone')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
+            // know if the ip is baned.
+            $table->boolean('is_banned')->default(0);
             $table->timestamps();
+
         });
     }
 
