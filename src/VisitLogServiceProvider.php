@@ -47,5 +47,8 @@ class VisitLogServiceProvider extends ServiceProvider
         $this->app->bind('VisitLog', function () use ($browser) {
             return new VisitLog($browser);
         });
+        // Registring a Middleware to check if the User is Banned
+        $router = $this->app['router'];
+        $router->pushMiddlewareToGroup('web', \Sarfraznawaz2005\VisitLog\Middleware\ipCheckMiddleware::class);
     }
 }
