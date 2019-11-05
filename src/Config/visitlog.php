@@ -85,6 +85,8 @@ return array(
 
     'visitlog_page' => true,
     'delete_log_button' => false,
+    // button to ban the entry
+    'ban_user_ip_button' => true,
     'delete_all_logs_button' => false,
     'http_authentication' => false
 );
