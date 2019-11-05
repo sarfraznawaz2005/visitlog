@@ -14,6 +14,7 @@ VisitLog is a simple Laravel 5 package that can be used to log visitor informati
  - Allows to log authenticated user info.
  - Provides log viewer page out of box.
  - Provides basic http authentication for app users.
+ - Ability to ban users by their IP
 
 
 **Note:** VisitLog cannot detect same user/IP coming from some anonymizer so it cannot differentiate that.
@@ -82,7 +83,16 @@ If config option `visitlog_page` is set to `true`, you can view all visit logs b
 
 In this case, you can still show log info in some authenticated area of your app by using `all` method of `VisitLog` facade: `$visitLogs = VisitLog::all();` and it will give you `Collection` that you can iterate over and show in your own view file.
 
+
+## Credits
+
+- [Sarfraz Ahmed][link-author]
+- [All Contributors][link-contributors]
+
 ## License ##
 
 This code is published under the [MIT License](http://opensource.org/licenses/MIT).
 This means you can do almost anything with it, as long as the copyright notice and the accompanying license file is left intact.
+
+[link-author]: https://github.com/sarfraznawaz2005
+[link-contributors]: https://github.com/sarfraznawaz2005/visitlog/graphs/contributors
