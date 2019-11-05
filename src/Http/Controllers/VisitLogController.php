@@ -62,4 +62,20 @@ class VisitLogController extends BaseController
 
         return Redirect::back();
     }
+
+    /**
+     * Ban A User by it's IP
+     *
+     * @param intger $id
+     * @return mixed
+     */
+    public function banOrUnbanUserIp($id)
+    {
+        $visitLog = VisitLogModel::find($id);
+
+        $visitLog->is_banned ? $visitLog->is_banned = 0 : $visitLog->is_banned = 1;
+        $visitLog->save();
+        
+        return Redirect::back();
+    }
 }
