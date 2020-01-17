@@ -2,6 +2,7 @@
 namespace Sarfraznawaz2005\VisitLog;
 
 use Illuminate\Support\ServiceProvider;
+use Sarfraznawaz2005\VisitLog\Middleware\ipCheckMiddleware;
 
 class VisitLogServiceProvider extends ServiceProvider
 {
@@ -44,11 +45,12 @@ class VisitLogServiceProvider extends ServiceProvider
         $browser = new Browser();
 
         // This helps Facade resolve the actual class
-        $this->app->bind('VisitLog', function () use ($browser) {
+        $this->app->bind('VisitLog', static function () use ($browser) {
             return new VisitLog($browser);
         });
+
         // Registring a Middleware to check if the User is Banned
         $router = $this->app['router'];
-        $router->pushMiddlewareToGroup('web', \Sarfraznawaz2005\VisitLog\Middleware\ipCheckMiddleware::class);
+        $router->pushMiddlewareToGroup('web', ipCheckMiddleware::class);
     }
 }

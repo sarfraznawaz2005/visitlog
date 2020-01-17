@@ -1,4 +1,5 @@
 <?php
+
 namespace Sarfraznawaz2005\VisitLog\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
@@ -66,7 +67,7 @@ class VisitLogController extends BaseController
     /**
      * Ban A User by it's IP
      *
-     * @param intger $id
+     * @param $id
      * @return mixed
      */
     public function banOrUnbanUserIp($id)
@@ -75,7 +76,7 @@ class VisitLogController extends BaseController
 
         $visitLog->is_banned ? $visitLog->is_banned = 0 : $visitLog->is_banned = 1;
         $visitLog->save();
-        
+
         return Redirect::back();
     }
 }
