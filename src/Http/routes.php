@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(
     [
         'namespace' => 'Sarfraznawaz2005\VisitLog\Http\Controllers',
-        'prefix' => config('visitlog.route', 'visitlog')
+        'prefix' => config('visitlog.route', 'visitlog'),
+        'middleware' => config('visitlog.middleware')
     ],
     function () {
         Route::get('/', 'VisitLogController@index')->name('__visitlog__');
