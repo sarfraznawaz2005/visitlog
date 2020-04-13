@@ -18,7 +18,7 @@ class ipCheckMiddleware extends VisitLog
      */
     public function handle($request, Closure $next)
     {
-        $ip = (app('VisitLog'))->getUserIP();
+        $ip = app('VisitLog')->getUserIP();
 
         if (VisitModel::where('ip', $ip)->where('is_banned', 1)->first()) {
             abort(404);
