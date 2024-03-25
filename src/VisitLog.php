@@ -11,7 +11,7 @@ class VisitLog
     protected $browser = null;
     protected $cachePrefix = 'visitlog';
     protected $freegeoipUrl = 'http://api.ipstack.com';
-    protected $ipApiUrl = 'http://ip-api.com/';
+    protected $ipApiUrl = 'http://ip-api.com';
     protected $tokenString = '&output=json&legacy=1';
 
     /**
