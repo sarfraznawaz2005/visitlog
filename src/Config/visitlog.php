@@ -24,6 +24,8 @@ return array(
     | and Browser info.
     |
     | Note: For requests from same IP, it will be cached so no further request is made to http://freegeoip.net
+    | 
+    | UPDATE: If ip_api is set to "true", it will ignore the iptolocation config.
     |
     */
 
