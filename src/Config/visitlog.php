@@ -27,7 +27,10 @@ return array(
     |
     */
 
-    'iptolocation' => true,
+    // FREE IP API - https://ip-api.com/
+    'ip_api' => true,
+
+    'iptolocation' => false,
     'token' => 'PASTE_YOUR_TOKEN', // get your token here: https://ipstack.com/
 
     /*
