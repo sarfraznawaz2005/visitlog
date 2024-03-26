@@ -11,6 +11,7 @@ class VisitLog
     protected $browser = null;
     protected $cachePrefix = 'visitlog';
     protected $freegeoipUrl = 'http://api.ipstack.com';
+    protected $ipApiUrl = 'http://ip-api.com';
     protected $tokenString = '&output=json&legacy=1';
 
     /**
@@ -100,7 +101,8 @@ class VisitLog
     {
         $ip = $this->getUserIP();
         $cacheKey = $this->cachePrefix . $ip;
-        $url = $this->freegeoipUrl . '/' . $ip . '?' . '&access_key=' . config('visitlog.token') . $this->tokenString;
+        $url_freegeoip = $this->freegeoipUrl . '/' . $ip . '?' . '&access_key=' . config('visitlog.token') . $this->tokenString;
+        $url_ipApi = $this->ipApiUrl . '/json/' . $ip;
 
         // basic info
         $data = [
@@ -109,26 +111,60 @@ class VisitLog
             'os' => $this->browser->getPlatform() ?: 'Unknown',
         ];
 
-        // info from http://freegeoip.net
-        if (config('visitlog.iptolocation')) {
+        // info from https://ip-api.com/
+        if (config('visitlog.ip_api')) {
             if (config('visitlog.cache')) {
-                $freegeoipData = unserialize(Cache::get($cacheKey));
+                $ipApiCacheKey = $cacheKey . '_apiip';
+                $ipApiData = unserialize(Cache::get($ipApiCacheKey));
 
-                if (!$freegeoipData) {
-                    $freegeoipData = @json_decode(file_get_contents($url), true);
+                if (!$ipApiData) {
+                    $ipApiData = @json_decode(file_get_contents($url_ipApi), true);
 
-                    if ($freegeoipData) {
-                        Cache::forever($cacheKey, serialize($freegeoipData));
+                    if ($ipApiData) {
+                        Cache::forever($ipApiCacheKey, serialize($ipApiData));
                     }
                 }
             } else {
-                $freegeoipData = @json_decode(file_get_contents($url), true);
+                $ipApiData = @json_decode(file_get_contents($url_ipApi), true);
             }
 
-            if ($freegeoipData) {
-                $data = array_merge($data, $freegeoipData);
+            if ($ipApiData && $ipApiData['status'] == 'success') {
+                $parsedData = [
+                    'country_name' => $ipApiData['country'],
+                    'region_name' => $ipApiData['regionName'],
+                    'city' => $ipApiData['city'],
+                    'zip_code' => $ipApiData['zip'],
+                    'time_zone' => $ipApiData['timezone'],
+                    'latitude' => $ipApiData['lat'],
+                    'longitude' => $ipApiData['lon'],
+                ];
+
+                $data = array_merge($data, $parsedData);
+            }
+        } else {
+            // info from http://freegeoip.net
+            if (config('visitlog.iptolocation')) {
+                if (config('visitlog.cache')) {
+                    $freegeoipCacheKey = $cacheKey . '_freegeoip';
+                    $freegeoipData = unserialize(Cache::get($freegeoipCacheKey));
+    
+                    if (!$freegeoipData) {
+                        $freegeoipData = @json_decode(file_get_contents($url_freegeoip), true);
+    
+                        if ($freegeoipData) {
+                            Cache::forever($freegeoipCacheKey, serialize($freegeoipData));
+                        }
+                    }
+                } else {
+                    $freegeoipData = @json_decode(file_get_contents($url_freegeoip), true);
+                }
+    
+                if ($freegeoipData) {
+                    $data = array_merge($data, $freegeoipData);
+                }
             }
         }
+
 
         $userData = $this->getUser();
 
