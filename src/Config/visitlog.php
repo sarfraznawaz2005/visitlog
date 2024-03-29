@@ -32,6 +32,9 @@ return array(
     // FREE IP API - https://ip-api.com/
     'ip_api' => true,
 
+    'ip2locationio' => false,
+    'ip2locationio_key' => 'PASTE_YOUR_IP2LOCATION_IO_API_KEY', // get your API key from https://www.ip2location.io
+
     'iptolocation' => false,
     'token' => 'PASTE_YOUR_TOKEN', // get your token here: https://ipstack.com/
 
