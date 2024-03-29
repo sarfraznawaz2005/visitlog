@@ -13,6 +13,7 @@ class VisitLog
     protected $freegeoipUrl = 'http://api.ipstack.com';
     protected $ipApiUrl = 'http://ip-api.com';
     protected $tokenString = '&output=json&legacy=1';
+    protected $ip2locationIOUrl = 'https://api.ip2location.io';
 
     /**
      * VisitLog constructor.
@@ -103,6 +104,7 @@ class VisitLog
         $cacheKey = $this->cachePrefix . $ip;
         $url_freegeoip = $this->freegeoipUrl . '/' . $ip . '?' . '&access_key=' . config('visitlog.token') . $this->tokenString;
         $url_ipApi = $this->ipApiUrl . '/json/' . $ip;
+        $url_ip2locationIO = (config('visitlog.ip2locationio_key') == 'PASTE_YOUR_IP2LOCATION_IO_API_KEY') ? $this->ip2locationIOUrl . '/?ip=' . $ip : $this->ip2locationIOUrl . '/?ip=' . $ip . '&key=' . config('visitlog.ip2locationio_key');
 
         // basic info
         $data = [
@@ -137,6 +139,36 @@ class VisitLog
                     'time_zone' => $ipApiData['timezone'],
                     'latitude' => $ipApiData['lat'],
                     'longitude' => $ipApiData['lon'],
+                ];
+
+                $data = array_merge($data, $parsedData);
+            }
+        } elseif (config('visitlog.ip2locationio')) {
+            // info from https://www.ip2location.io
+            if (config('visitlog.cache')) {
+                $ip2locationIOCacheKey = $cacheKey . '_iplio';
+                $ip2locationIOData = unserialize(Cache::get($ip2locationIOCacheKey));
+
+                if (!$ip2locationIOData) {
+                    $ip2locationIOData = @json_decode(file_get_contents($url_ip2locationIO), true);
+
+                    if ($ip2locationIOData) {
+                        Cache::forever($ip2locationIOCacheKey, serialize($ip2locationIOData));
+                    }
+                }
+            } else {
+                $ip2locationIOData = @json_decode(file_get_contents($url_ip2locationIO), true);
+            }
+
+            if ($ip2locationIOData) {
+                $parsedData = [
+                    'country_name' => $ip2locationIOData['country_name'],
+                    'region_name' => $ip2locationIOData['region_name'],
+                    'city' => $ip2locationIOData['city_name'],
+                    'zip_code' => $ip2locationIOData['zip_code'],
+                    'time_zone' => $ip2locationIOData['time_zone'],
+                    'latitude' => $ip2locationIOData['latitude'],
+                    'longitude' => $ip2locationIOData['longitude'],
                 ];
 
                 $data = array_merge($data, $parsedData);

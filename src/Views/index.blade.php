@@ -53,7 +53,7 @@
 
             <table cellspacing="0" width="100%" id="table-log"
                    class="table table-striped table-bordered table-sm table-hover table-condensed dt-responsive nowrap">
-                @if (config('visitlog.iptolocation') || config('visitlog.ip_api'))
+                @if (config('visitlog.iptolocation') || config('visitlog.ip_api') || config('visitlog.ip2locationio'))
                     <thead>
                     <tr>
                         <th>#</th>
